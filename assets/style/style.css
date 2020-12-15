@@ -6,6 +6,12 @@ body {
     background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2Ftrees-landscape-forest-sea-water-nature-sky-shadow-clouds-airplane-Earth-Tourism-coast-photo-manipulation-world-atmosphere-aerial-view-island-coral-reef-fisheye-lens-tree-ocean-archipelago-islet-1920x1080-px-computer-wallpaper-aerial-photography-atoll-inlet-water-resources-coastal-and-oceanic-landforms-826450.jpg&f=1&nofb=1");
 }
 
+/* Override bootstrap's background-color for navbar */
 nav {
     background-color: skyblue;
+}
+
+/* Override's bootstrap form's height */
+form {
+    height: 40px;
 }
