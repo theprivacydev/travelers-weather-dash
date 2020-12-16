@@ -2,7 +2,7 @@
 // OpenWeather API Key
 const apiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 
-loadDashTemplate();
+// loadDashTemplate();
 
 // Creates event listener for "Go" button
 const searchCityButton = $('#search-city');
@@ -31,7 +31,7 @@ function getWeatherInfo () {
       }).then(function(data) {
         console.log(data);
         // Display city name and info on to the page
-        $('#city-name-date').text(data.name);
+        $('#city-name').text(data.name);
         $('#temperature').text('Temperature: ' + data.main.temp)
         $('#humidity').text('Humidity: ' + data.main.humidity)
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
