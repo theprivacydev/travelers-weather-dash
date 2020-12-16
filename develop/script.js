@@ -30,7 +30,20 @@ function getWeatherInfo () {
         method: "GET"
       }).then(function(data) {
         console.log(data);
+        // Display city name and info on to the page
         $('#city-name-date').text(data.name);
+        $('#temperature').text('Temperature: ' + data.main.temp)
+        $('#humidity').text('Humidity: ' + data.main.humidity)
+        $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
+        $('#uv-index').text('UV Index: ')
+
+        // Display weather icon to the page
+        var iconCode = data.weather[0].icon;
+        var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png"
+        $('#icon-image').attr('src', iconSource);
+
+
+
       });
 }
 
@@ -51,7 +64,7 @@ function loadDashTemplate () {
         method: "GET"
       }).then(function(data) {
         console.log(data);
-        $('#city-name-date').text(data.name);
+        $('#city-name').text(data.name);
         $('#temperature').text('Temperature: ' + data.main.temp)
         $('#humidity').text('Humidity: ' + data.main.humidity)
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed)

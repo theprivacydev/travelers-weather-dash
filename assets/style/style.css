@@ -19,19 +19,29 @@ form {
 .weather-info {
     background-color: rgb(135, 206, 235, .9);
     width: 60%;
-    height: 300px;
+    height: 250px;
     margin-top: 50px;
     /* margin-right: 50px; */
 }
 
-#city-name-date {
+#city-name, #date {
     font-weight: bold;
     color: rgb(10, 108, 235);
     text-align: center;
 }
 
+#date {
+    font-size: large;
+    padding-bottom: 20px;
+}
+
+#icon-image {
+    padding-bottom: 20px;
+}
+
 h2 {
     padding-top: 10px;
+    padding-bottom: 10px;
     font-weight: bold;
     color: rgb(10, 108, 235);
 }
