@@ -11,7 +11,15 @@ nav {
     background-color: skyblue;
 }
 
-/* Override's bootstrap form's height */
+/* Override's bootstrap/s form height for city-search in navbar */
 form {
     height: 40px;
+}
+
+.city-info {
+    background-color: rgb(135, 206, 235, .8);
+    width: 60%;
+    height: 200px;
+    margin-top: 50px;
+    margin-right: 50px;
 }
