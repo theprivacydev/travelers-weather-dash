@@ -55,7 +55,12 @@ function loadDashTemplate () {
         $('#temperature').text('Temperature: ' + data.main.temp)
         $('#humidity').text('Humidity: ' + data.main.humidity)
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
-        $('#uv-index').text()
+        $('#uv-index').text('UV Index: ')
+
+        // Loading weather icons
+        var iconCode = data.weather[0].icon;
+        var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png"
+        $('#icon-image').attr('src', iconSource);
       });
 }
 
