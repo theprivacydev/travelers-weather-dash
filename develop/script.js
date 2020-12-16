@@ -2,6 +2,7 @@
 // OpenWeather API Key
 const apiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 
+loadDashTemplate();
 
 // Creates event listener for "Go" button
 const searchCityButton = $('#search-city');
@@ -27,16 +28,40 @@ function getWeatherInfo () {
       $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
-        console.log(response);
-        $('#city-name-date').text(response.name);
+      }).then(function(data) {
+        console.log(data);
+        $('#city-name-date').text(data.name);
       });
 }
 
 function sidebarSavedCities () {
+    // Moves Dash to the right
+    $('.weather-info').attr('margin-right', "50px");
 
+    // Creates Sidebar
+    var sidebarDiv$ = $('<div>').addClass('sidebar');
+    $('sidebar').append(sidebarDiv$);
 
 }
+
+function loadDashTemplate () {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Portland" + "&appid=" + apiKey;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(data) {
+        console.log(data);
+        $('#city-name-date').text(data.name);
+        $('#temperature').text('Temperature: ' + data.main.temp)
+        $('#humidity').text('Humidity: ' + data.main.humidity)
+        $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
+        $('#uv-index').text()
+      });
+}
+
+
+
+
 
     //   api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 

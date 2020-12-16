@@ -35,7 +35,16 @@ h2 {
     font-weight: bold;
     color: rgb(10, 108, 235);
 }
+p {
+    color: rgb(10, 108, 235);
+    text-align: center;
+}
 
 .hide {
     display: none;
+}
+
+.sidebar {
+
+
 }
