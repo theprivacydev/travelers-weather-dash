@@ -16,15 +16,17 @@
         <a class="navbar-brand"><strong>Traveler's Weather Dash</strong></a>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search City" aria-label="Search">
-          <button class="btn btn-info" type="submit" id="search-city">Go</button>
+          <button class="btn btn-info" id="search-city">Go</button>
         </form>
       </div>
   </nav>
   
-  <!-- City-info container -->
-  <div class="container city-info">
+  <!-- Weather-info container -->
+  <div class="container weather-info">
+    <h2 class="opening">Weather Info</h2>
     <div class="row row-cols-2">
-      <div class="col" id="city-date">
+      <div class="col">
+        <h4 id="city-name-date"></h4>
         <p id="temperature"></p>
         <p id="humidity"></p>
         <p id="wind-speed"></p>
@@ -41,11 +43,11 @@
   <!-- 5 day forecast container -->
   <div class="container">
     <div class="row row-cols-2">
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
+      <div class="col" id="first-day"></div>
+      <div class="col" id="second-day"></div>
+      <div class="col" id="third-day"></div>
+      <div class="col" id="fourth-day"></div>
+      <div class="col" id="fifth-day"></div>
     </div>
   </div>
 
