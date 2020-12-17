@@ -2,8 +2,10 @@
 // OpenWeather API Key
 const apiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 
+// Sets Date
+var currentDate = moment().format("MMM Do YYYY");
 
-// loadDashTemplate();
+loadDashTemplate();
 
 // Creates event listener for buttons
 const searchCityButton = $('#search-city');
@@ -33,6 +35,7 @@ function getWeatherInfo () {
         console.log(data);
         // Display city name and info on to the page
         $('#city-name').text(data.name);
+        $('#date').text(currentDate);
         $('#temperature').text('Temperature: ' + data.main.temp)
         $('#humidity').text('Humidity: ' + data.main.humidity)
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
@@ -67,6 +70,7 @@ function loadDashTemplate () {
       }).then(function(data) {
         console.log(data);
         $('#city-name').text(data.name);
+        $('#date').text(currentDate);
         $('#temperature').text('Temperature: ' + data.main.temp)
         $('#humidity').text('Humidity: ' + data.main.humidity)
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed)
