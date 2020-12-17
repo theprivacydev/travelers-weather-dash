@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    text-align: center;
     background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2Ftrees-landscape-forest-sea-water-nature-sky-shadow-clouds-airplane-Earth-Tourism-coast-photo-manipulation-world-atmosphere-aerial-view-island-coral-reef-fisheye-lens-tree-ocean-archipelago-islet-1920x1080-px-computer-wallpaper-aerial-photography-atoll-inlet-water-resources-coastal-and-oceanic-landforms-826450.jpg&f=1&nofb=1");
 }
 
@@ -16,47 +15,62 @@ form {
     height: 40px;
 }
 
-.weather-info {
-    background-color: rgb(135, 206, 235, .9);
-    width: 60%;
-    height: 250px;
-    margin-top: 50px;
-    /* margin-right: 50px; */
+/* Sidebar created in js file */
+.sidebar {
+    float: left;
+    text-align: center;
+    color: rgb(10, 67, 141);
+    font-weight: bold;
+    padding: 10px;
+    margin-left:0;
+    height: 800px;
+    width: 200px;
+    background-color:  rgba(106, 202, 240, 0.9);
 }
 
+/* Weather dash*/
+.weather-info {
+    text-align: center;
+    background-color: rgb(135, 206, 235, .9);
+    width: 60%;
+    height: 300px;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+
+/* City name and date */
 #city-name, #date {
     font-weight: bold;
     color: rgb(10, 108, 235);
     text-align: center;
 }
 
+/* Date */
 #date {
     font-size: large;
     padding-bottom: 20px;
 }
 
+/* Weather icon */
 #icon-image {
     padding-bottom: 20px;
 }
 
+/* Weather Dash title */
 h2 {
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
     color: rgb(10, 108, 235);
 }
+
+/* Weather-info */
 p {
     color: rgb(10, 108, 235);
     text-align: center;
 }
 
+/* Hides anything that adds this class */
 .hide {
     display: none;
-}
-
-.sidebar {
-    height: 100%;
-    background-color:  rgb(135, 206, 235, .9);
-
-
 }

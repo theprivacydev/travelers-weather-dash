@@ -2,11 +2,14 @@
 // OpenWeather API Key
 const apiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 
+
 // loadDashTemplate();
 
-// Creates event listener for "Go" button
+// Creates event listener for buttons
 const searchCityButton = $('#search-city');
 searchCityButton.click(saveCity);
+const myCities = $('#saved-cities');
+myCities.click(sidebarSavedCities);
 
 // Saves searched city to client-side storage
 function saveCity (event) {
@@ -16,8 +19,6 @@ function saveCity (event) {
 
     let userCity$ = $('input').val();
     localStorage.setItem('city', userCity$);
-
-    sidebarSavedCities();
 }
 
 
@@ -48,13 +49,14 @@ function getWeatherInfo () {
 }
 
 function sidebarSavedCities () {
-    // Moves Dash to the right
-    $('.weather-info').attr('margin-right', "50px");
+    // Unhide sidebar
+    let savedCities = $('.sidebar').show();
 
-    // Creates Sidebar
-    var sidebarDiv$ = $('<div>').addClass('sidebar');
-    $('sidebar').append(sidebarDiv$);
+    // Displays cities in sidebar
+    let city = savedCities.text(localStorage.getItem('city'));
 
+    city.click(getWeatherInfo(city));
+    
 }
 
 function loadDashTemplate () {
