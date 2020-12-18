@@ -32,7 +32,7 @@ form {
 /* Styles opening sentence for first time user */
 h3 {
     padding-top: 40px;
-    color: rgb(96, 181, 238);
+    color:  rgb(96, 181, 238);
 }
 
 /* Weather info containers*/
@@ -56,17 +56,18 @@ h3 {
 /* Date */
 #date {
     font-size: large;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
     padding-top: 10px;
 }
 
 /* Weather icon */
 #icon-image {
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
 
 /* Weather Dash title */
 h2, h4 {
+    color:  rgb(96, 181, 238);
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
