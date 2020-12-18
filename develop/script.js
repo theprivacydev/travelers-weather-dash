@@ -69,6 +69,7 @@ function loadOpeningPage () {
 }
 
 function getForecast () {
+    $('.forecast').addClass('weather-info');
     let city = "Portland";
     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey
     $.ajax({
@@ -80,4 +81,4 @@ function getForecast () {
       });
 }
 
-getForecast();
+// getForecast();
