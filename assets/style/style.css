@@ -8,8 +8,7 @@ body {
 
 /* Override bootstrap's colors for navbar */
 nav {
-    background-color: rgba(86, 191, 233, 0.9)
-    /* rgba(7, 103, 141, 0.9); */
+    background-color: rgba(96, 181, 238, 0.9)
 }
 
 .navbar-brand, .dropdown-item, .dropdown-toggle{
@@ -23,22 +22,24 @@ form {
 
 
 .dropdown-menu {
-    background-color:  rgba(86, 191, 233, 0.9);
+    background-color:  rgba(96, 181, 238, 0.9);
 }
 
 .dropdown-item:hover {
     background-color:rgb(106, 167, 218);
 }
 
+/* Styles opening sentence for first time user */
 h3 {
     padding-top: 40px;
-    color: rgb(10, 67, 141);
+    color: rgb(96, 181, 238);
 }
+
 /* Weather info containers*/
 .weather-info {
     width: 500px;
     text-align: center;
-    background-color: rgb(135, 206, 235, .9);
+    background-color: rgba(7, 103, 141, 0.9);
     height: 300px;
     margin-top: 50px;
     margin-right: auto;
@@ -48,7 +49,7 @@ h3 {
 /* City name and date */
 #city-name, #date {
     font-weight: bold;
-    color:  rgb(10, 67, 141);
+    color: rgb(96, 181, 238);
     text-align: center;
 }
 
@@ -69,12 +70,11 @@ h2, h4 {
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
-    color:  rgb(10, 67, 141);
 }
 
 /* Weather-info */
 p {
-    color:  rgb(10, 67, 141);
+    color: rgb(96, 181, 238);
     text-align: center;
 }
 
