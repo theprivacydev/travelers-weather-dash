@@ -3,11 +3,16 @@ body {
     padding: 0;
     font-family: sans-serif;
     background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2Ftrees-landscape-forest-sea-water-nature-sky-shadow-clouds-airplane-Earth-Tourism-coast-photo-manipulation-world-atmosphere-aerial-view-island-coral-reef-fisheye-lens-tree-ocean-archipelago-islet-1920x1080-px-computer-wallpaper-aerial-photography-atoll-inlet-water-resources-coastal-and-oceanic-landforms-826450.jpg&f=1&nofb=1");
+    background-repeat: none;
 }
 
-/* Override bootstrap's background-color for navbar */
+/* Override bootstrap's colors for navbar */
 nav {
     background-color:rgb(135, 206, 235, .9);
+}
+
+.navbar-brand, .dropdown-item, .dropdown-toggle{
+    color: rgb(10, 108, 235);
 }
 
 /* Override's bootstrap/s form height for city-search in navbar */
@@ -15,33 +20,40 @@ form {
     height: 40px;
 }
 
-/* Sidebar created in js file */
-.sidebar {
-    float: left;
-    text-align: center;
-    color: rgb(10, 67, 141);
-    font-weight: bold;
-    padding: 10px;
-    margin-left:0;
-    height: 800px;
-    width: 200px;
-    background-color:  rgba(106, 202, 240, 0.9);
+
+.dropdown-menu {
+    background-color:  rgb(135, 206, 235, .9);
 }
 
-/* Weather dash*/
+.dropdown-item:hover {
+    background-color:rgb(106, 167, 218);
+}
+
+.btn-info {
+    background-color:rgb(107, 195, 230);
+    color: rgb(5, 83, 146);
+    border: solid;
+    border-color: rgb(10, 108, 235)
+}
+
+/* .btn-info:hover {
+    background-color: steelblue;
+} */
+/* Weather info containers*/
 .weather-info {
+    width: 500px;
     text-align: center;
     background-color: rgb(135, 206, 235, .9);
-    width: 60%;
     height: 300px;
     margin-top: 50px;
-    margin-right: 50px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /* City name and date */
 #city-name, #date {
     font-weight: bold;
-    color: rgb(10, 108, 235);
+    color:  rgb(10, 67, 141);
     text-align: center;
 }
 
@@ -49,6 +61,7 @@ form {
 #date {
     font-size: large;
     padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 /* Weather icon */
@@ -57,16 +70,16 @@ form {
 }
 
 /* Weather Dash title */
-h2 {
+h2, h4 {
     padding-top: 10px;
     padding-bottom: 10px;
     font-weight: bold;
-    color: rgb(10, 108, 235);
+    color:  rgb(10, 67, 141);
 }
 
 /* Weather-info */
 p {
-    color: rgb(10, 108, 235);
+    color:  rgb(10, 67, 141);
     text-align: center;
 }
 
