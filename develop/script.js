@@ -9,17 +9,9 @@ loadOpeningPage();
 
 // Creates event listener for buttons
 const searchCityButton = $('#search-city');
-searchCityButton.click(saveCity);
+searchCityButton.click(getWeatherInfo);
 const myCities = $('#saved-cities');
 myCities.click(dropdownMyCities);
-
-// Saves searched city to client-side storage
-function saveCity (event) {
-    event.preventDefault();
-    let userCity$ = $('input').val();
-    localStorage.setItem('city', userCity$);
-    getWeatherInfo();
-}
 
 // Converts Temp to farenheight from Kelvin
 function kelvinToFarenheight (k) {
@@ -28,9 +20,11 @@ function kelvinToFarenheight (k) {
   };
 
 // Calls weather by the city name and puts info in html
-function getWeatherInfo () {
+function getWeatherInfo (event) {
+  event.preventDefault();
     $('h3').hide();
     let cityName$ = $('input').val();
+    localStorage.setItem('city', cityName$);
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName$ + "&appid=" + apiKey;
       $.ajax({
         url: queryURL,
@@ -65,7 +59,11 @@ function dropdownMyCities () {
 }
 
 function loadOpeningPage () {
+  if (localStorage.key === 'city') {
+    getWeatherInfo()
+  }
    $('#opening').text('Enter a City in the search bar to get the weather!')
+   
 }
 
 function getForecast () {

@@ -14,15 +14,17 @@
   <nav class="navbar">
     <div class="container-fluid">
           <a class="navbar-brand"><strong>Traveler's Weather Dash</strong></a>
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong>My Cities</strong></a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">London</a></li>
-            <li><a class="dropdown-item" href="#">Paris</a></li>
-            <li><a class="dropdown-item" href="#">Portland</a></li>
-          </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search City" aria-label="Search">
           <button class="btn btn-info" id="search-city">Go</button>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong>My Cities</strong></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item dropright" href="#">London</a></li>
+              <li><a class="dropdown-item" href="#">Paris</a></li>
+              <li><a class="dropdown-item" href="#">Portland</a></li>
+            </ul>
+        </div>
         </form>
       </div>
   </nav>
