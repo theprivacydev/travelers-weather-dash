@@ -8,11 +8,12 @@ body {
 
 /* Override bootstrap's colors for navbar */
 nav {
-    background-color:rgb(135, 206, 235, .9);
+    background-color: rgba(86, 191, 233, 0.9)
+    /* rgba(7, 103, 141, 0.9); */
 }
 
 .navbar-brand, .dropdown-item, .dropdown-toggle{
-    color: rgb(10, 108, 235);
+    color:  rgb(10, 67, 141);
 }
 
 /* Override's bootstrap/s form height for city-search in navbar */
@@ -22,23 +23,20 @@ form {
 
 
 .dropdown-menu {
-    background-color:  rgb(135, 206, 235, .9);
+    background-color:  rgba(86, 191, 233, 0.9);
 }
 
 .dropdown-item:hover {
     background-color:rgb(106, 167, 218);
 }
 
-.btn-info {
+/* .btn, .btn-info {
     background-color:rgb(107, 195, 230);
-    color: rgb(5, 83, 146);
+    color: rgb(50, 183, 224);
     border: solid;
     border-color: rgb(10, 108, 235)
-}
-
-/* .btn-info:hover {
-    background-color: steelblue;
 } */
+
 /* Weather info containers*/
 .weather-info {
     width: 500px;
