@@ -30,13 +30,10 @@ form {
     background-color:rgb(106, 167, 218);
 }
 
-/* .btn, .btn-info {
-    background-color:rgb(107, 195, 230);
-    color: rgb(50, 183, 224);
-    border: solid;
-    border-color: rgb(10, 108, 235)
-} */
-
+h3 {
+    padding-top: 40px;
+    color: rgb(10, 67, 141);
+}
 /* Weather info containers*/
 .weather-info {
     width: 500px;
