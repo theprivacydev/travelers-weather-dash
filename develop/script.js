@@ -105,6 +105,7 @@ function getForecast () {
         method: "GET"
       }).then(function(data) {
         console.log(data);
+        // For every day[i] ...
         for (let i=0; i < 5; i++) {
           // Creates columns with classes
           let column = $('<div>').addClass('col-sm forecast-info');
@@ -123,6 +124,7 @@ function getForecast () {
           const unixDt = data.list[i].dt;
           const dateJs = new Date(unixDt*1000);
           day.text(dateJs.toLocaleDateString('en-US'));
+          // Sets temp and humidity text to display weather-api info
           let temp = kelvinToFarenheight(data.list[i].main.temp);
           displayTemp.text('Humidity: ' + temp + '%');
           humidity.text('Temp: ' + data.list[i].main.humidity + ' \u00B0F');
