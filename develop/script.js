@@ -40,9 +40,6 @@ function getWeatherInfo (event) {
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
         $('#uv-index').text('UV Index: ');
 
-
-        $('.forecast').addClass('weather-info');
-
         // let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.lat + "&lon=" + data.lon + "&appid=" + openWeatherApiKey;
   
         // $.ajax({
@@ -57,8 +54,10 @@ function getWeatherInfo (event) {
         var iconCode = data.weather[0].icon;
         var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
         $('#icon-image').attr('src', iconSource);
-        dropdownMyCities();
+
       });
+      getForecast();
+      dropdownMyCities();
 }
 
 
@@ -96,16 +95,21 @@ function loadOpeningPage () {
 }
 
 
-// function getForecast () {
-//     $('.forecast').addClass('weather-info');
-//     let city = "&city=Portland";
-//     let queryURL = "https://api.weatherbit.io/v2.0/history/daily?" + city + "&start_date=2020-12-16&end_date=2020-12-17" + uvApiKey;
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//       }).then(function(data) {
-//         console.log(data);
-//         $('#uv-index').text('UV Index: ', );
+function getForecast () {
+    $('.forecast').addClass('weather-info');
+    let city = $('input').val();
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + openWeatherApiKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(data) {
+        console.log(data);
+        data.list
 
-//       });
-// }
+
+
+
+
+
+      });
+}
