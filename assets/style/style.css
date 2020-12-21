@@ -65,6 +65,16 @@ h3 {
     padding-bottom: 25px;
 }
 
+/* Forecast container */
+.forecast-info {
+    width: 60%;
+    text-align: center;
+    background-color: rgba(7, 103, 141, 0.9);
+    height: 200px;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
 /* Weather Dash title */
 h2, h4, h5 {
     color:  skyblue;

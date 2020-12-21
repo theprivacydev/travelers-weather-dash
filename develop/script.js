@@ -97,7 +97,7 @@ function loadOpeningPage () {
 
 // Function to get 5-day forecast
 function getForecast () {
-    $('.forecast').addClass('weather-info');
+    // $('.forecast').addClass('forecast-info');
     let city = $('input').val();
     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + openWeatherApiKey;
     $.ajax({
@@ -107,7 +107,7 @@ function getForecast () {
         console.log(data);
         for (let i=0; i < 5; i++) {
           // Creates columns with classes
-          let column = $('<div>').addClass('col-4');
+          let column = $('<div>').addClass('col-sm forecast-info');
           $('.forecast-row').append(column);
           let day = $('<h5>').addClass('forecast-date');
           // Converts and displays weather icon
