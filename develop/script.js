@@ -87,6 +87,7 @@ function dropdownMyCities () {
       }
 }
 
+// Function for 1st time user entering page
 function loadOpeningPage () {
   // if (localStorage.key === 'TWD Cities: ') {
   //   getWeatherInfo();
@@ -94,7 +95,7 @@ function loadOpeningPage () {
    $('#opening').text('Enter a City in the search bar to get the weather!');
 }
 
-
+// Function to get 5-day forecast
 function getForecast () {
     $('.forecast').addClass('weather-info');
     let city = $('input').val();
@@ -105,14 +106,17 @@ function getForecast () {
       }).then(function(data) {
         console.log(data);
         for (let i=0; i < 5; i++) {
+          // Creates columns with classes for displaying date, temp and humidity
           let column = $('<div>').addClass('col-4');
           $('.forecast-row').append(column);
           let day = $('<h5>').addClass('forecast-date');
           let displayTemp = $('<p>').addClass('forecast-temp');
           let humidity = $('<p>').addClass('forecast-humidity');
           $(column).append(day, displayTemp, humidity);
-          
-          day.text(data.list[i].dt_txt);
+          // Converts api date to regular js date
+          const unixDt = data.list[i].dt;
+          const dateJs = new Date(unixDt*1000);
+          day.text(dateJs.toLocaleDateString('en-US'));
           let temp = kelvinToFarenheight(data.list[i].main.temp);
           displayTemp.text('Humidity: ' + temp + '%');
           humidity.text('Temp: ' + data.list[i].main.humidity + ' \u00B0F');
