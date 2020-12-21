@@ -107,7 +107,7 @@ function getForecast () {
         for (let i=0; i < 5; i++) {
           let column = $('<div>').addClass('col-4');
           $('.forecast-row').append(column);
-          let day = $('<h4>').addClass('forecast-date');
+          let day = $('<h5>').addClass('forecast-date');
           let displayTemp = $('<p>').addClass('forecast-temp');
           let humidity = $('<p>').addClass('forecast-humidity');
           $(column).append(day, displayTemp, humidity);
