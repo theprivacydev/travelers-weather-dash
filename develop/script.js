@@ -104,12 +104,19 @@ function getForecast () {
         method: "GET"
       }).then(function(data) {
         console.log(data);
-        data.list
-
-
-
-
-
+        for (let i=0; i < 5; i++) {
+          let column = $('<div>').addClass('col-4');
+          $('.forecast-row').append(column);
+          let day = $('<h4>').addClass('forecast-date');
+          let displayTemp = $('<p>').addClass('forecast-temp');
+          let humidity = $('<p>').addClass('forecast-humidity');
+          $(column).append(day, displayTemp, humidity);
+          
+          day.text(data.list[i].dt_txt);
+          let temp = kelvinToFarenheight(data.list[i].main.temp);
+          displayTemp.text('Humidity: ' + temp + '%');
+          humidity.text('Temp: ' + data.list[i].main.humidity + ' \u00B0F');
+        };
 
       });
 }
