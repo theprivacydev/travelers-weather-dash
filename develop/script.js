@@ -106,13 +106,19 @@ function getForecast () {
       }).then(function(data) {
         console.log(data);
         for (let i=0; i < 5; i++) {
-          // Creates columns with classes for displaying date, temp and humidity
+          // Creates columns with classes
           let column = $('<div>').addClass('col-4');
           $('.forecast-row').append(column);
           let day = $('<h5>').addClass('forecast-date');
+          // Converts and displays weather icon
+          let weatherIcon = $('<img>').addClass('forecast-icon');
+          let iconKey = data.list[i].weather[0].icon;
+          let iconSrc = "http://openweathermap.org/img/w/" + iconKey + ".png";
+          weatherIcon.attr('src', iconSrc);
+          // Creates display for temp and humidity
           let displayTemp = $('<p>').addClass('forecast-temp');
           let humidity = $('<p>').addClass('forecast-humidity');
-          $(column).append(day, displayTemp, humidity);
+          $(column).append(day, weatherIcon, displayTemp, humidity);
           // Converts api date to regular js date
           const unixDt = data.list[i].dt;
           const dateJs = new Date(unixDt*1000);
