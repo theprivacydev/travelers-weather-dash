@@ -43,15 +43,15 @@ function getWeatherInfo (event) {
         $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
         $('#uv-index').text('UV Index: ');
 
-        // let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.lat + "&lon=" + data.lon + "&appid=" + openWeatherApiKey;
+        let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
   
-        // $.ajax({
-        //   url: uvURL,
-        //   method: "GET"
-        // }).then(function(response) {
-        //   console.log(response);
-          // $('#uv-index').text('UV Index: ');
-          // });
+        $.ajax({
+          url: uvURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log(response);
+          $('#uv-index').text('UV Index: ' + response.value);
+          });
 
         // Display weather icon to the page
         var iconCode = data.weather[0].icon;
@@ -60,22 +60,9 @@ function getWeatherInfo (event) {
 
       });
       getForecast();
+      dropdownMyCities();
 }
 
-
-// function getUvIndex () {
-//   let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}"
-  
-//   $.ajax({
-//     url: uvURL,
-//     method: "GET"
-//   }).then(function(data) {
-
-
-//     $('#uv-index').text('UV Index: ');
-//     });
-
-// }
 
 // Displays cities from client-side storage in dropdown menu
 function dropdownMyCities () {
@@ -100,7 +87,6 @@ function loadOpeningPage () {
 
 // Function to get 5-day forecast
 function getForecast () {
-    $('.forecast-row').empty();
     // Creates 5 day forecast title
     let forecastTitle = $('<div>').addClass('row');
     $('.forecast-row').append(forecastTitle);
@@ -131,7 +117,7 @@ function getForecast () {
           let humidity = $('<p>').addClass('forecast-humidity');
           $(column).append(day, weatherIcon, displayTemp, humidity);
           // Converts api date to regular js date
-          const unixDt = JSON.parse(data.list[i].dt);
+          const unixDt = JSON.parse(data.list[1].dt);
           const dateJs = new Date(unixDt*1000);
           day.text(dateJs.toLocaleDateString('en-US'));
           console.log(dateJs);
