@@ -1,9 +1,12 @@
+// Calls opening page function which displays page for first time user or loads last city from local storage
+loadOpeningPage();
+
 
 // OpenWeather API Key
 const openWeatherApiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 const uvApiKey = "&key=d3f777192d194d2fa2c8955860268325";
 
-// Sets Date
+// Sets Date (for weather-dash) from moment.js
 var currentDate = moment().format("MMM Do YYYY");
 
 var citiesArr = [];
@@ -97,7 +100,7 @@ function loadOpeningPage () {
 
 // Function to get 5-day forecast
 function getForecast () {
-    // $('.forecast').addClass('forecast-info');
+    $('.forecast-row').empty();
     let city = $('input').val();
     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + openWeatherApiKey;
     $.ajax({
