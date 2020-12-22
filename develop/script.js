@@ -80,6 +80,7 @@ function getWeatherInfo (event) {
 
 // Displays cities from client-side storage in dropdown menu
 function dropdownMyCities () {
+  $('.dropdown-menu').empty();
   let savedCites = localStorage.getItem('TWD Cities: ');
   let savedCitesArr = savedCites.split(',');
       for (let i=0; i< savedCitesArr.length; i++) {
