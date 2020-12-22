@@ -101,8 +101,15 @@ function loadOpeningPage () {
 // Function to get 5-day forecast
 function getForecast () {
     $('.forecast-row').empty();
+    // Creates 5 day forecast title
+    let forecastTitle = $('<div>').addClass('row');
+    $('.forecast-row').append(forecastTitle);
+    let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
+    forecastTitle.append(title);
+    // Sets variables for api call
     let city = $('input').val();
     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + openWeatherApiKey;
+    // Api call
     $.ajax({
         url: queryURL,
         method: "GET"
