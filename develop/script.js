@@ -27,7 +27,7 @@ function getWeatherInfo (event) {
     $('h3').hide();
     let cityName$ = $('input').val();
     citiesArr.push(cityName$);
-    JSON.stringify(localStorage.setItem('TWD Cities: ', citiesArr));
+    localStorage.setItem('TWD Cities: ', citiesArr);
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName$ + "&appid=" + openWeatherApiKey;
       $.ajax({
         url: queryURL,
@@ -80,13 +80,14 @@ function getWeatherInfo (event) {
 
 // Displays cities from client-side storage in dropdown menu
 function dropdownMyCities () {
-  let savedCites = JSON.parse(localStorage.getItem('TWD Cities: '));
-  console.log(savedCites);
-      for (let i = 0; i < savedCites.length; i++) {
+  let savedCites = localStorage.getItem('TWD Cities: ');
+  let savedCitesArr = savedCites.split(',');
+      for (let i=0; i< savedCitesArr.length; i++) {
+        console.log(savedCitesArr[i]);
         let city$ = $('<li>').addClass('dropdown-item dropright');
         $('.dropdown-menu').append(city$);
-        city$.text(savedCites[i]);
-        console.log(savedCites[i]);
+        city$.text(savedCitesArr[i]);
+
       }
 }
 
@@ -131,8 +132,9 @@ function getForecast () {
           let humidity = $('<p>').addClass('forecast-humidity');
           $(column).append(day, weatherIcon, displayTemp, humidity);
           // Converts api date to regular js date
-          const unixDt = data.list[i].dt;
+          const unixDt = JSON.parse(data.list[i].dt);
           const dateJs = new Date(unixDt*1000);
+          console.log(dateJs);
           day.text(dateJs.toLocaleDateString('en-US'));
           // Sets temp and humidity text to display weather-api info
           let temp = kelvinToFarenheight(data.list[i].main.temp);
