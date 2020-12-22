@@ -1,6 +1,6 @@
 // Calls opening page function which displays page for first time user or loads last city from local storage
 loadOpeningPage();
-
+dropdownMyCities();
 
 // OpenWeather API Key
 const openWeatherApiKey = "8d184f5374e0c6605e52dd1fb2f43631";
@@ -60,7 +60,6 @@ function getWeatherInfo (event) {
 
       });
       getForecast();
-      dropdownMyCities();
 }
 
 
@@ -84,7 +83,6 @@ function dropdownMyCities () {
   let savedCites = localStorage.getItem('TWD Cities: ');
   let savedCitesArr = savedCites.split(',');
       for (let i=0; i< savedCitesArr.length; i++) {
-        console.log(savedCitesArr[i]);
         let city$ = $('<li>').addClass('dropdown-item dropright');
         $('.dropdown-menu').append(city$);
         city$.text(savedCitesArr[i]);
@@ -135,8 +133,8 @@ function getForecast () {
           // Converts api date to regular js date
           const unixDt = JSON.parse(data.list[i].dt);
           const dateJs = new Date(unixDt*1000);
-          console.log(dateJs);
           day.text(dateJs.toLocaleDateString('en-US'));
+          console.log(dateJs);
           // Sets temp and humidity text to display weather-api info
           let temp = kelvinToFarenheight(data.list[i].main.temp);
           displayTemp.text('Humidity: ' + temp + '%');
