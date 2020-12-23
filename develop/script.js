@@ -1,5 +1,5 @@
 // Calls opening page function which displays page for first time user or loads last city from local storage
-loadOpeningPage();
+// loadOpeningPage();
 dropdownMyCities();
 
 // OpenWeather API Key
@@ -9,7 +9,7 @@ const uvApiKey = "&key=d3f777192d194d2fa2c8955860268325";
 // Sets Date (for weather-dash) from moment.js
 var currentDate = moment().format("MMM Do YYYY");
 
-var citiesArr = [];
+var citiesArr = localStorage.getItem('TWD Cities: ').split(',');
 // Creates event listener for buttons
 const searchCityButton = $('#search-city');
 searchCityButton.click(getWeatherInfo);
@@ -21,101 +21,114 @@ function kelvinToFarenheight (k) {
     return f.toFixed(1);
   };
 
+function getWeatherInfoFromDropdown (event) {
+  console.log($(this).text());
+  makeAPICalls($(this).text());
+}
+
 // Calls weather by the city name and puts info in html
 function getWeatherInfo (event) {
   event.preventDefault();
     $('h3').hide();
     let cityName$ = $('input').val();
+    console.log(cityName$)
     citiesArr.push(cityName$);
     localStorage.setItem('TWD Cities: ', citiesArr);
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName$ + "&appid=" + openWeatherApiKey;
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(data) {
-        console.log(data);
-        let temp = kelvinToFarenheight(data.main.temp);
-        // Display city name and info on to the page
-        $('#city-name').text(data.name);
-        $('#date').text(currentDate);
-        $('#temperature').text('Temperature: ' + temp + ' \u00B0F');
-        $('#humidity').text('Humidity: ' + data.main.humidity + ' %');
-        $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
-        $('#uv-index').text('UV Index: ');
-
-        let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
-        
-        // Call to get UV Index based on latitude and longitude of city
-        $.ajax({
-          url: uvURL,
-          method: "GET"
-        }).then(function(response) {
-          console.log(response);
-          $('#uv-index').text('UV Index: ' + response.value);
-          if (response.value < 3) {
-            $('#uv-index').removeClass('moderate severe');
-            $('#uv-index').addClass('favorable');
-          } if (6 > response.value > 3) {
-            $('#uv-index').removeClass('favorable severe');
-            $('#uv-index').addClass('moderate');
-          } if (response.value > 6) {
-            $('#uv-index').removeClass('moderate favorable');
-            $('#uv-index').addClass('severe');
-          }
-          // End Uv api call
-          });
-
-        // Display weather icon to the weather dash
-        var iconCode = data.weather[0].icon;
-        var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
-        $('#icon-image').attr('src', iconSource);
-
-            // Creates 5 day forecast title
-          let forecastTitle = $('<div>').addClass('row');
-          $('.forecast-row').append(forecastTitle);
-          let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
-          forecastTitle.append(title);
-          // Sets url variable for api call
-          let forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + '&lon=' + data.coord.lon + "&appid=" + openWeatherApiKey;
-          // Api call
-          $.ajax({
-              url: forecastURL,
-              method: "GET"
-            }).then(function(forecastData) {
-              console.log(forecastData);
-              // For every day[i] ...
-              for (let i=0; i < 5; i++) {
-                // Creates columns with classes
-                let column = $('<div>').addClass('col-sm forecast-info');
-                $('.forecast-row').append(column);
-                let day = $('<h5>').addClass('forecast-date');
-                // Converts and displays weather icon
-                let weatherIcon = $('<img>').addClass('forecast-icon');
-                let iconKey = forecastData.daily[i].weather[0].icon;
-                let iconSrc = "http://openweathermap.org/img/w/" + iconKey + ".png";
-                weatherIcon.attr('src', iconSrc);
-                // Creates display for temp and humidity
-                let displayTemp = $('<p>').addClass('forecast-temp');
-                let humidity = $('<p>').addClass('forecast-humidity');
-                $(column).append(day, weatherIcon, displayTemp, humidity);
-                // Converts api date to regular js date
-                const unixDt = JSON.parse(forecastData.daily[i].dt);
-                const dateJs = new Date(unixDt*1000);
-                day.text(dateJs.toLocaleDateString('en-US'));
-                console.log(dateJs);
-                // Sets temp and humidity text to display weather-api info
-                let forecastTemp = kelvinToFarenheight(forecastData.daily[i].temp.day);
-                displayTemp.text('Temp: ' + forecastTemp + ' \u00B0F');
-                humidity.text('Humidity: '+ forecastData.daily[i].humidity + '%');
-            // End for loop
-              };
-            // End forecast api call
-            });
-      // End first api call
-      });
-      dropdownMyCities();
+  
+    makeAPICalls(cityName$);
+    dropdownMyCities();
 // End getWeatherInfo function
 }
+
+function makeAPICalls (city) {
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + openWeatherApiKey;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(data) {
+    console.log(data);
+    let temp = kelvinToFarenheight(data.main.temp);
+    // Display city name and info on to the page
+    $('#city-name').text(data.name);
+    $('#date').text(currentDate);
+    $('#temperature').text('Temperature: ' + temp + ' \u00B0F');
+    $('#humidity').text('Humidity: ' + data.main.humidity + ' %');
+    $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
+    $('#uv-index').text('UV Index: ');
+
+    let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
+    
+    // Call to get UV Index based on latitude and longitude of city
+    $.ajax({
+      url: uvURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      $('#uv-index').text('UV Index: ' + response.value);
+      if (response.value < 3) {
+        $('#uv-index').removeClass('moderate severe');
+        $('#uv-index').addClass('favorable');
+      } if (6 > response.value > 3) {
+        $('#uv-index').removeClass('favorable severe');
+        $('#uv-index').addClass('moderate');
+      } if (response.value > 6) {
+        $('#uv-index').removeClass('moderate favorable');
+        $('#uv-index').addClass('severe');
+      }
+      // End Uv api call
+      });
+
+    // Display weather icon to the weather dash
+    var iconCode = data.weather[0].icon;
+    var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    $('#icon-image').attr('src', iconSource);
+
+        // Creates 5 day forecast title
+      let forecastTitle = $('<div>').addClass('row');
+      $('.forecast-row').append(forecastTitle);
+      let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
+      forecastTitle.append(title);
+      // Sets url variable for api call
+      let forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + '&lon=' + data.coord.lon + "&appid=" + openWeatherApiKey;
+      // Api call
+      $.ajax({
+          url: forecastURL,
+          method: "GET"
+        }).then(function(forecastData) {
+          console.log(forecastData);
+          // For every day[i] ...
+          for (let i=0; i < 5; i++) {
+            // Creates columns with classes
+            let column = $('<div>').addClass('col-sm forecast-info');
+            $('.forecast-row').append(column);
+            let day = $('<h5>').addClass('forecast-date');
+            // Converts and displays weather icon
+            let weatherIcon = $('<img>').addClass('forecast-icon');
+            let iconKey = forecastData.daily[i].weather[0].icon;
+            let iconSrc = "http://openweathermap.org/img/w/" + iconKey + ".png";
+            weatherIcon.attr('src', iconSrc);
+            // Creates display for temp and humidity
+            let displayTemp = $('<p>').addClass('forecast-temp');
+            let humidity = $('<p>').addClass('forecast-humidity');
+            $(column).append(day, weatherIcon, displayTemp, humidity);
+            // Converts api date to regular js date
+            const unixDt = JSON.parse(forecastData.daily[i].dt);
+            const dateJs = new Date(unixDt*1000);
+            day.text(dateJs.toLocaleDateString('en-US'));
+            // Sets temp and humidity text to display weather-api info
+            let forecastTemp = kelvinToFarenheight(forecastData.daily[i].temp.day);
+            displayTemp.text('Temp: ' + forecastTemp + ' \u00B0F');
+            humidity.text('Humidity: '+ forecastData.daily[i].humidity + '%');
+        // End for loop
+          };
+        // End forecast api call
+        });
+  // End first api call
+  });
+}
+
+
+
 
 
 // Displays cities from client-side storage in dropdown menu
@@ -129,10 +142,10 @@ function dropdownMyCities () {
         city$.text(savedCitesArr[i]);
         // city$.click(getWeatherInfo);
       }
+      // Adds event listener for each dropdown city
+      $('.dropdown-item').click(getWeatherInfoFromDropdown);
 }
 
-// Adds event listener for each dropdown city
-// $('li').click(getWeatherInfo);
 
 // Function for 1st time user entering page
 function loadOpeningPage () {
