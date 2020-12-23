@@ -1,7 +1,3 @@
-// Calls opening page function which displays page for first time user or loads last city from local storage
-// loadOpeningPage();
-dropdownMyCities();
-
 // OpenWeather API Key
 const openWeatherApiKey = "8d184f5374e0c6605e52dd1fb2f43631";
 const uvApiKey = "&key=d3f777192d194d2fa2c8955860268325";
@@ -14,6 +10,10 @@ var citiesArr = localStorage.getItem('TWD Cities: ').split(',');
 const searchCityButton = $('#search-city');
 searchCityButton.click(getWeatherInfo);
 const myCities = $('#saved-cities');
+
+// Calls opening page function which displays page for first time user or loads last city from local storage
+loadOpeningPage();
+dropdownMyCities();
 
 // Converts Temp to farenheight from Kelvin
 function kelvinToFarenheight (k) {
@@ -29,18 +29,18 @@ function getWeatherInfoFromDropdown (event) {
 // Calls weather by the city name and puts info in html
 function getWeatherInfo (event) {
   event.preventDefault();
-    $('h3').hide();
     let cityName$ = $('input').val();
     console.log(cityName$)
     citiesArr.push(cityName$);
     localStorage.setItem('TWD Cities: ', citiesArr);
   
-    makeAPICalls(cityName$);
+    makeAPICalls(cityName$)
     dropdownMyCities();
 // End getWeatherInfo function
 }
 
 function makeAPICalls (city) {
+  $('h3').hide();
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + openWeatherApiKey;
   $.ajax({
     url: queryURL,
@@ -84,6 +84,7 @@ function makeAPICalls (city) {
     $('#icon-image').attr('src', iconSource);
 
         // Creates 5 day forecast title
+      $('.forecast-row').empty();
       let forecastTitle = $('<div>').addClass('row');
       $('.forecast-row').append(forecastTitle);
       let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
@@ -149,8 +150,12 @@ function dropdownMyCities () {
 
 // Function for 1st time user entering page
 function loadOpeningPage () {
-  if (localStorage.key === 'TWD Cities: ') {
-    getWeatherInfo();
-  } 
-   $('#opening').text('Enter a City in the search bar to get the weather!');
+  let cityList = localStorage.getItem('TWD Cities: ');
+  if (cityList === null) {
+    return  $('#opening').text('Enter a City in the search bar to get the weather!');
+  } else {
+    let cityListArr = cityList.split(',');
+    let openingCity = cityListArr[cityListArr.length - 1];
+    makeAPICalls(openingCity);
+  }
 }
