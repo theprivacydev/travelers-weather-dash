@@ -105,6 +105,27 @@ p {
     text-align: center;
 }
 
+/* UV classes which change color based on severity */
+
+.favorable {
+    border: solid;
+    border-color: Green;
+    background: green;
+}
+
+.moderate {
+    border: solid;
+    border-color: yellow;
+    background: yellow;
+}
+
+.severe {
+    border: solid;
+    border-color: red;
+    background: red;
+    font-weight: bold;
+}
+
 /* Hides anything that adds this class */
 .hide {
     display: none;
