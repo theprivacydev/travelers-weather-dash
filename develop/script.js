@@ -44,23 +44,77 @@ function getWeatherInfo (event) {
         $('#uv-index').text('UV Index: ');
 
         let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
-  
+        
+        // Call to get UV Index based on latitude and longitude of city
         $.ajax({
           url: uvURL,
           method: "GET"
         }).then(function(response) {
           console.log(response);
           $('#uv-index').text('UV Index: ' + response.value);
+          if (response.value < 3) {
+            $('#uv-index').removeClass('moderate severe');
+            $('#uv-index').addClass('favorable');
+          } if (6 > response.value > 3) {
+            $('#uv-index').removeClass('favorable severe');
+            $('#uv-index').addClass('moderate');
+          } if (response.value > 6) {
+            $('#uv-index').removeClass('moderate favorable');
+            $('#uv-index').addClass('severe');
+          }
+          // End Uv api call
           });
 
-        // Display weather icon to the page
+        // Display weather icon to the weather dash
         var iconCode = data.weather[0].icon;
         var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
         $('#icon-image').attr('src', iconSource);
 
+            // Creates 5 day forecast title
+          let forecastTitle = $('<div>').addClass('row');
+          $('.forecast-row').append(forecastTitle);
+          let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
+          forecastTitle.append(title);
+          // Sets url variable for api call
+          let forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + '&lon=' + data.coord.lon + "&appid=" + openWeatherApiKey;
+          // Api call
+          $.ajax({
+              url: forecastURL,
+              method: "GET"
+            }).then(function(forecastData) {
+              console.log(forecastData);
+              // For every day[i] ...
+              for (let i=0; i < 5; i++) {
+                // Creates columns with classes
+                let column = $('<div>').addClass('col-sm forecast-info');
+                $('.forecast-row').append(column);
+                let day = $('<h5>').addClass('forecast-date');
+                // Converts and displays weather icon
+                let weatherIcon = $('<img>').addClass('forecast-icon');
+                let iconKey = forecastData.daily[i].weather[0].icon;
+                let iconSrc = "http://openweathermap.org/img/w/" + iconKey + ".png";
+                weatherIcon.attr('src', iconSrc);
+                // Creates display for temp and humidity
+                let displayTemp = $('<p>').addClass('forecast-temp');
+                let humidity = $('<p>').addClass('forecast-humidity');
+                $(column).append(day, weatherIcon, displayTemp, humidity);
+                // Converts api date to regular js date
+                const unixDt = JSON.parse(forecastData.daily[i].dt);
+                const dateJs = new Date(unixDt*1000);
+                day.text(dateJs.toLocaleDateString('en-US'));
+                console.log(dateJs);
+                // Sets temp and humidity text to display weather-api info
+                let forecastTemp = kelvinToFarenheight(forecastData.daily[i].temp.day);
+                displayTemp.text('Temp: ' + forecastTemp + ' \u00B0F');
+                humidity.text('Humidity: '+ forecastData.daily[i].humidity + '%');
+            // End for loop
+              };
+            // End forecast api call
+            });
+      // End first api call
       });
-      getForecast();
       dropdownMyCities();
+// End getWeatherInfo function
 }
 
 
@@ -73,59 +127,17 @@ function dropdownMyCities () {
         let city$ = $('<li>').addClass('dropdown-item dropright');
         $('.dropdown-menu').append(city$);
         city$.text(savedCitesArr[i]);
-
+        // city$.click(getWeatherInfo);
       }
 }
 
+// Adds event listener for each dropdown city
+// $('li').click(getWeatherInfo);
+
 // Function for 1st time user entering page
 function loadOpeningPage () {
-  // if (localStorage.key === 'TWD Cities: ') {
-  //   getWeatherInfo();
-  // } 
+  if (localStorage.key === 'TWD Cities: ') {
+    getWeatherInfo();
+  } 
    $('#opening').text('Enter a City in the search bar to get the weather!');
-}
-
-// Function to get 5-day forecast
-function getForecast () {
-    // Creates 5 day forecast title
-    let forecastTitle = $('<div>').addClass('row');
-    $('.forecast-row').append(forecastTitle);
-    let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
-    forecastTitle.append(title);
-    // Sets variables for api call
-    let city = $('input').val();
-    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + openWeatherApiKey;
-    // Api call
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(data) {
-        console.log(data);
-        // For every day[i] ...
-        for (let i=0; i < 5; i++) {
-          // Creates columns with classes
-          let column = $('<div>').addClass('col-sm forecast-info');
-          $('.forecast-row').append(column);
-          let day = $('<h5>').addClass('forecast-date');
-          // Converts and displays weather icon
-          let weatherIcon = $('<img>').addClass('forecast-icon');
-          let iconKey = data.list[i].weather[0].icon;
-          let iconSrc = "http://openweathermap.org/img/w/" + iconKey + ".png";
-          weatherIcon.attr('src', iconSrc);
-          // Creates display for temp and humidity
-          let displayTemp = $('<p>').addClass('forecast-temp');
-          let humidity = $('<p>').addClass('forecast-humidity');
-          $(column).append(day, weatherIcon, displayTemp, humidity);
-          // Converts api date to regular js date
-          const unixDt = JSON.parse(data.list[1].dt);
-          const dateJs = new Date(unixDt*1000);
-          day.text(dateJs.toLocaleDateString('en-US'));
-          console.log(dateJs);
-          // Sets temp and humidity text to display weather-api info
-          let temp = kelvinToFarenheight(data.list[i].main.temp);
-          displayTemp.text('Humidity: ' + temp + '%');
-          humidity.text('Temp: ' + data.list[i].main.humidity + ' \u00B0F');
-        };
-
-      });
 }
