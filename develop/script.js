@@ -152,7 +152,8 @@ function dropdownMyCities () {
 function loadOpeningPage () {
   let cityList = localStorage.getItem('TWD Cities: ');
   if (cityList === null) {
-    return  $('#opening').text('Enter a City in the search bar to get the weather!');
+   $('#opening').text('Enter a City in the search bar to get the weather!');
+   return
   } else {
     let cityListArr = cityList.split(',');
     let openingCity = cityListArr[cityListArr.length - 1];
