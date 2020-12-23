@@ -5,7 +5,7 @@ const uvApiKey = "&key=d3f777192d194d2fa2c8955860268325";
 // Sets Date (for weather-dash) from moment.js
 var currentDate = moment().format("MMM Do YYYY");
 
-var citiesArr = localStorage.getItem('TWD Cities: ').split(',');
+var citiesArr = [] || localStorage.getItem('TWD Cities: ').split(',');
 // Creates event listener for buttons
 const searchCityButton = $('#search-city');
 searchCityButton.click(getWeatherInfo);
