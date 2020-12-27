@@ -15,6 +15,10 @@ Deployed Application Link: https://jaymemizelle.github.io/travelers-weather-dash
 * Javascript
 * JQuery
 * Bootstrap
+* Web APIs/ AJAX
+
+# Acknowledgements
+API calls for getting all weather info called from: https://openweathermap.org/api
 
 # Next Steps
 Refactor code for readability by abstracting the functions built within the AJAX api calls. 
