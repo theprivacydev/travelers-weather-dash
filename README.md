@@ -4,8 +4,8 @@ This is a responsive application designed to use the OpenWeather API to load a w
 
 ## Table of Contents
 * [Getting Started](#getting-started)
-* [Built With](#built-with)
 * [Main Page](#main-page)
+* [Built With](#built-with)
 * [Deployment](#deployment)
 * [Acknowledgements](#acknowledgements)
 * [Next Steps](#next-steps)
@@ -14,6 +14,9 @@ This is a responsive application designed to use the OpenWeather API to load a w
 
 ## Getting Started
 There are no special instructions to get a copy of this project up and running on your local machine. Simply click on the deployed application link or copy and paste the url into your search bar to open in the browser of your choice.
+
+## Main Page
+![application-screenshot](./assets/images/travelers-weather-dash.png)
 
 
 ## Built With
@@ -24,10 +27,6 @@ There are no special instructions to get a copy of this project up and running o
 * JQuery
 * Bootstrap
 * Web APIs/ AJAX
-
-## Main Page
-![application-screenshot](./assets/images/travelers-weather-dash.png)
-
 
 ## Deployment 
 
