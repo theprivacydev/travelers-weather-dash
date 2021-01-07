@@ -35,6 +35,12 @@ h3 {
     color:  skyblue;
 }
 
+h4 {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 /* Weather info containers*/
 .weather-info {
     width: 500px;
@@ -74,14 +80,16 @@ h3 {
     padding-top: 20px;
     padding: 10px;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 10px;
     margin-bottom: 10px;
 }
 
 .forecast-title {
     margin-top: 50px;
-    margin-left: auto;
+    margin-left: 10px;
     margin-right: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: rgba(7, 103, 141, 0.9);
     text-align: center;
 }

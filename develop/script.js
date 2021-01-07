@@ -49,11 +49,11 @@ function makeAPICalls (city) {
     let temp = kelvinToFarenheight(data.main.temp);
     // Display city name and info on to the page
     $('#city-name').text(data.name);
-    $('#date').text(currentDate);
+    $('#date').text(currentDate).addClass('row-cols-2');
     $('#temperature').text('Temperature: ' + temp + ' \u00B0F');
     $('#humidity').text('Humidity: ' + data.main.humidity + ' %');
     $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
-    $('#uv-index').text('UV Index: ');
+    $('#uv-index').text('UV Index: ').addClass('row-cols-2');
 
     let uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
     
@@ -80,13 +80,13 @@ function makeAPICalls (city) {
     // Display weather icon to the weather dash
     var iconCode = data.weather[0].icon;
     var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    $('#icon-image').attr('src', iconSource);
+    $('#icon-image').attr('src', iconSource).addClass('row-cols-2');
 
         // Creates 5 day forecast title
       $('.forecast-row').empty();
-      let forecastTitle = $('<div>').addClass('row');
+      let forecastTitle = $('<div>').addClass('row forecast-title');
       $('.forecast-row').append(forecastTitle);
-      let title = $('<h4>').addClass('col-4 forecast-title').text('Five Day Forecast');
+      let title = $('<h4>').addClass('col-4').text('Five Day Forecast');
       forecastTitle.append(title);
       // Sets url variable for api call
       let forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + '&lon=' + data.coord.lon + "&appid=" + openWeatherApiKey;
