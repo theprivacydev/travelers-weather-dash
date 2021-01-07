@@ -49,11 +49,16 @@ function makeAPICalls (city) {
     let temp = kelvinToFarenheight(data.main.temp);
     // Display city name and info on to the page
     $('#city-name').text(data.name);
-    $('#date').text(currentDate).addClass('row-cols-2');
     $('#temperature').text('Temperature: ' + temp + ' \u00B0F');
     $('#humidity').text('Humidity: ' + data.main.humidity + ' %');
     $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
-    $('#uv-index').text('UV Index: ').addClass('row-cols-2');
+    $('#date').text(currentDate);
+    $('#uv-index').text('UV Index: ');
+
+    // Display weather icon to the weather dash
+    var iconCode = data.weather[0].icon;
+    var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    $('#icon-image').attr('src', iconSource);
 
     let uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
     
@@ -76,11 +81,6 @@ function makeAPICalls (city) {
       }
       // End Uv api call
       });
-
-    // Display weather icon to the weather dash
-    var iconCode = data.weather[0].icon;
-    var iconSource = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    $('#icon-image').attr('src', iconSource).addClass('row-cols-2');
 
         // Creates 5 day forecast title
       $('.forecast-row').empty();
@@ -134,11 +134,13 @@ function makeAPICalls (city) {
 // Displays cities from client-side storage in dropdown menu
 function dropdownMyCities () {
   $('.dropdown-menu').empty();
-      for (let i=0; i< citiesArr.length; i++) {
+  let savedCites = localStorage.getItem('TWD Cities: ');
+  let savedCitesArr = savedCites.split(',');
+      for (let i=0; i< savedCitesArr.length; i++) {
         let city$ = $('<li>').addClass('dropdown-item dropright');
         $('.dropdown-menu').append(city$);
-        city$.text(citiesArr[i]);
-        console.log(citiesArr);
+        city$.text(savedCitesArr[i]);
+        console.log(savedCitesArr);
       }
       // Adds event listener for each dropdown city
       $('.dropdown-item').click(getWeatherInfoFromDropdown);
