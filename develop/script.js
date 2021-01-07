@@ -1,6 +1,5 @@
 // OpenWeather API Key
 const openWeatherApiKey = "8d184f5374e0c6605e52dd1fb2f43631";
-const uvApiKey = "&key=d3f777192d194d2fa2c8955860268325";
 
 // Sets Date (for weather-dash) from moment.js
 var currentDate = moment().format("MMM Do YYYY");
@@ -56,7 +55,7 @@ function makeAPICalls (city) {
     $('#wind-speed').text('Wind-speed: ' + data.wind.speed + ' mph');
     $('#uv-index').text('UV Index: ');
 
-    let uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
+    let uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&appid=" + openWeatherApiKey;
     
     // Call to get UV Index based on latitude and longitude of city
     $.ajax({
