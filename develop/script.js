@@ -135,13 +135,11 @@ function makeAPICalls (city) {
 // Displays cities from client-side storage in dropdown menu
 function dropdownMyCities () {
   $('.dropdown-menu').empty();
-  let savedCites = localStorage.getItem('TWD Cities: ');
-  let savedCitesArr = savedCites.split(',');
-      for (let i=0; i< savedCitesArr.length; i++) {
+      for (let i=0; i< citiesArr.length; i++) {
         let city$ = $('<li>').addClass('dropdown-item dropright');
         $('.dropdown-menu').append(city$);
-        city$.text(savedCitesArr[i]);
-        // city$.click(getWeatherInfo);
+        city$.text(citiesArr[i]);
+        console.log(citiesArr);
       }
       // Adds event listener for each dropdown city
       $('.dropdown-item').click(getWeatherInfoFromDropdown);
