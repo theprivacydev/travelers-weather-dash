@@ -35,8 +35,12 @@ Deployed Application URL: https://jaymemizelle.github.io/travelers-weather-dash/
 ## Acknowledgements
 API calls for getting all weather info called from: https://openweathermap.org/api
 
+## License
+* MIT
+
 ## Next Steps
 Refactor code for readability by abstracting the functions built within the AJAX api calls. 
 
- ## Author
+ ## Contact the Author
 * Jayme Mizelle
+* jlm_developer@protonmail.com
