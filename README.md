@@ -30,7 +30,7 @@ There are no special instructions to get a copy of this project up and running o
 
 ## Deployment 
 
-Deployed Application URL: https://the-privacy-dev.github.io/travelers-weather-dash/
+Deployed Application URL: https://theprivacydev.github.io/travelers-weather-dash/
 
 ## Acknowledgements
 API calls for getting all weather info called from: https://openweathermap.org/api
