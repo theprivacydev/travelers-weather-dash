@@ -30,7 +30,7 @@ There are no special instructions to get a copy of this project up and running o
 
 ## Deployment 
 
-Deployed Application URL: https://jaymemizelle.github.io/travelers-weather-dash/
+Deployed Application URL: https://the-privacy-dev.github.io/travelers-weather-dash/
 
 ## Acknowledgements
 API calls for getting all weather info called from: https://openweathermap.org/api
@@ -42,5 +42,5 @@ API calls for getting all weather info called from: https://openweathermap.org/a
 Refactor code for readability by abstracting the functions built within the AJAX api calls. 
 
  ## Contact the Author
-* Jayme Mizelle
-* jlm_developer@protonmail.com
+* The Privacy Dev
+* theprivacydev@protonmail.com
